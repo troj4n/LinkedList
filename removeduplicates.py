@@ -1,5 +1,3 @@
-#This code has memory leak issues. Beacuse nodes are not deleted
-#If anyone can fix this. please do
 class Node:
     def __init__(self,data):
         self.data=data
@@ -21,18 +19,16 @@ class LinkedList():
         print "Null"
 
 def removeDuplicates(l):
-    temp=l.head
-    nxt=l.head
-    traverse=l.head
-    while traverse is not None:
-        if temp.data is nxt.data:
-            while nxt.data is temp.data:
-                nxt=nxt.next
-            temp.next=nxt
+    temp = l.head
+    if temp is None:
+        return
+    while temp.next is not None:
+        if temp.data == temp.next.data:
+            new = temp.next.next
+            temp.next = None
+            temp.next = new
         else:
-            temp=temp.next
-            nxt=nxt.next
-        traverse=traverse.next
+            temp = temp.next
 
 l=LinkedList()
 l.push(64)
